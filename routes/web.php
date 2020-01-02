@@ -17,3 +17,7 @@ Route::get('/', function () {
 
 Route::get('/index','Index\IndexController@index');
 
+Route::get('/index/pay','Index\IndexController@alipay');        //去支付
+
+Route::get('/test/alipay/return','Alipay\PayController@aliReturn');
+Route::post('/test/alipay/notify','Alipay\PayController@notify');
