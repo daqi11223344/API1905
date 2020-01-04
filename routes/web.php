@@ -19,5 +19,8 @@ Route::get('/index','Index\IndexController@index');
 
 Route::get('/index/pay','Index\IndexController@alipay');        //去支付
 
-Route::get('/test/alipay/return','Alipay\PayController@aliReturn');
-Route::post('/test/alipay/notify','Alipay\PayController@notify');
+Route::get('/index/alipay/return','Alipay\PayController@aliReturn');
+Route::post('/index/alipay/notify','Alipay\PayController@notify');
+
+Route::get('/index/userList','Index\IndexController@userList')->middleware('index');     //用户列表
+

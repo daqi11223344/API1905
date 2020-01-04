@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Index;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class IndexController extends Controller
 {
@@ -79,5 +80,34 @@ class IndexController extends Controller
         //发送GET请求
         //echo $url;die;
         header("Location:".$url);
+    }
+
+    /**
+     * 
+     * 获取用户列表
+     * 2020年1月2# 
+     */
+
+    public function userList()
+    {
+        $user_token = $_SERVER['HTTP_TOKEN'];
+        $current_url = $_SERVER['REQUEST_URI'];
+        echo 'user_token:'.$user_token;echo '</br>';
+        echo "当前URL:".$current_url;echo'<hr>';
+        // echo '<pre>';print_r($_SERVER);echo '</pre>';
+        $redis_key = 'str:count:url:'.$user_token.'url:'.md5($current_url);
+        echo 'redis key: '.$redis_key;echo '</br>'; 
+
+        // $count = Redis::get($redis_key);    //获取接口的访问次数
+        // echo "接口的访问次数： ".$count;echo '</br>';
+
+        // if($count>=5){
+        //     echo "<b style='color:red'>访问太频繁，本次访问已达到上限，下次吧</b>";
+        //     Redis::expire($redis_key,60);
+        //     die;
+        // }
+
+        $count = Redis::incr($redis_key);
+        echo 'count: '.$count;
     }
 }
