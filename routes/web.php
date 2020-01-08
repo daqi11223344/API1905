@@ -15,12 +15,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/index','Index\IndexController@index');
 
-Route::get('/index/pay','Index\IndexController@alipay');        //去支付
+Route::get('/goods','Api\TestController@goods');
 
-Route::get('/index/alipay/return','Alipay\PayController@aliReturn');
-Route::post('/index/alipay/notify','Alipay\PayController@notify');
+Route::get('/de','Api\TestController@de');
+Route::get('/de2','Api\TestController@de2');
 
-Route::get('/index/userList','Index\IndexController@userList')->middleware('index');     //用户列表
+Route::get('/red1','Api\TestController@red1');
 
+Route::get('/curl1','Api\TestController@curl1');
+Route::get('/curl2','Api\TestController@curl2');
+
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+// 用户管理
+Route::get('/user/addkey','User\IndexController@addSSHKey1');
+Route::post('/user/addkey','User\IndexController@addSSHKey2');
+
+//解密数据
+Route::get('/user/decrypt/data','User\IndexController@decrypt');
+Route::post('/user/decrypt/data','User\IndexController@decrypt2');
